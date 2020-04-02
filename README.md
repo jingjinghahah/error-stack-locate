@@ -1,7 +1,3 @@
-<<<<<<< HEAD
-# error-stack-locate
-根据错误堆栈和sourcemap文件定位错误位置
-=======
 # error-stack-locate README
 
 This is the README for your extension "error-stack-locate". After writing up a brief description, we recommend including the following sections.
@@ -67,4 +63,3 @@ Added features X, Y, and Z.
 * [Markdown Syntax Reference](https://help.github.com/articles/markdown-basics/)
 
 **Enjoy!**
->>>>>>> feat: init
