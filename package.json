@@ -60,6 +60,15 @@
 		"pretest": "npm run compile",
 		"test": "node ./out/test/runTest.js"
 	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/jingjinghahah/error-stack-locate.git"
+	},
+	"license": "ISC",
+	"bugs": {
+		"url": "https://github.com/jingjinghahah/error-stack-locate/issues"
+	},
+	"homepage": "https://github.com/jingjinghahah/error-stack-locate#readme",
 	"devDependencies": {
 		"@types/ftp": "^0.3.31",
 		"@types/glob": "^7.1.1",
