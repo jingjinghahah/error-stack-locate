@@ -1,65 +1,28 @@
-# error-stack-locate README
+# error-stack README
 
-This is the README for your extension "error-stack-locate". After writing up a brief description, we recommend including the following sections.
+根据错误堆栈字符串、源码位置、sourceMap文件位置定位错误位置
 
-## Features
+## 使用方式
 
-Describe specific features of your extension including screenshots of your extension in action. Image paths are relative to this README file.
+1. 安装 error-stack 扩展
+2. 打开需要定位错误的项目
+3. 在项目根目录下新增文件 error-config.json 
+* `errorStack`: 错误堆栈字符串，以 `\n` 分割
+* `sourceMapPath`: `sourceMap` 文件的相对路径
+* `sourcePath`: 源代码相对路径
 
-For example if there is an image subfolder under your extension project workspace:
+```json
+{
+    "errorStack": "exception: (run [/test.js] failed) Uncaught TypeError: Cannot convert object to primitive value\nat sr (/test.js:16:243776) \nat /test.js:16:246038\nat /test.js:16:246058\nat r (/test.js:9:164184) \nat /test.js:16:142779\nat r (/test.js:9:164184) \nat /test.js:16:135969\nat r (/test.js:9:164184) \nat /test.js:9:164986\nat /test.js:9:164996\nat r (/test.js:1:143) \nat /test.js:9:163596\nat r (/test.js:1:143) \nat /test.js:9:111962\nat r (/test.js:1:143) \nat s (/test.js:1:157139) \nat /test.js:1:157756\nat /test.js:1:158427\nat r (/test.js:1:143) \nat /test.js:1:935",
+    "sourceMapPath": "./dist",
+    "sourcePath":"./"
+}
+```
+4. 在 vscode 左侧菜单中打开 Error stack 侧边栏
+根据错误堆栈解析出了错误位置信息生成了左侧树结构。错误信息解析得到：文件路径、行数、列数、代码信息，点击可打开错误代码所在文件。
 
-\!\[feature X\]\(images/feature-x.png\)
-
-> Tip: Many popular extensions utilize animations. This is an excellent way to show off your extension! We recommend short, focused animations that are easy to follow.
-
-## Requirements
-
-If you have any requirements or dependencies, add a section describing those and how to install and configure them.
-
-## Extension Settings
-
-Include if your extension adds any VS Code settings through the `contributes.configuration` extension point.
-
-For example:
-
-This extension contributes the following settings:
-
-* `myExtension.enable`: enable/disable this extension
-* `myExtension.thing`: set to `blah` to do something
-
-## Known Issues
-
-Calling out known issues can help limit users opening duplicate issues against your extension.
-
-## Release Notes
-
-Users appreciate release notes as you update your extension.
-
-### 1.0.0
-
-Initial release of ...
-
-### 1.0.1
-
-Fixed issue #.
-
-### 1.1.0
-
-Added features X, Y, and Z.
-
------------------------------------------------------------------------------------------------------------
-
-## Working with Markdown
-
-**Note:** You can author your README using Visual Studio Code.  Here are some useful editor keyboard shortcuts:
-
-* Split the editor (`Cmd+\` on macOS or `Ctrl+\` on Windows and Linux)
-* Toggle preview (`Shift+CMD+V` on macOS or `Shift+Ctrl+V` on Windows and Linux)
-* Press `Ctrl+Space` (Windows, Linux) or `Cmd+Space` (macOS) to see a list of Markdown snippets
-
-### For more information
-
-* [Visual Studio Code's Markdown Support](http://code.visualstudio.com/docs/languages/markdown)
-* [Markdown Syntax Reference](https://help.github.com/articles/markdown-basics/)
+说明：
+1. 父节点（错误信息）若没有可展开的子节点（文件路径、行数、列数、代码），则代表根据错误字符串没有找到对应的文件
+2. 若未生成左侧树，可点击刷新按钮重新生成
 
 **Enjoy!**

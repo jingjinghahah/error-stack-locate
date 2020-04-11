@@ -1,8 +1,9 @@
 {
-	"name": "error-stack-locate",
-	"displayName": "error-stack-locate",
-	"description": "",
-	"version": "0.0.1",
+	"name": "error-stack",
+	"displayName": "error-stack",
+	"description": "根据错误堆栈字符串、源码位置、sourceMap文件位置定位错误位置",
+	"publisher": "jingjing",
+	"version": "1.0.1",
 	"engines": {
 		"vscode": "^1.39.0"
 	},
@@ -10,29 +11,75 @@
 		"Other"
 	],
 	"activationEvents": [
-		"onCommand:extension.helloWorld"
+		"onView:errorStack",
+		"onCommand: errorStack.refreshEntry"
 	],
-	"main": "./src/extension.js",
+	"main": "./out/extension.js",
 	"contributes": {
+		"viewsContainers": {
+			"activitybar": [
+				{
+					"id": "error-stack",
+					"title": "Error Stack",
+					"icon": "media/dep.svg"
+				}
+			]
+		},
+		"views": {
+			"error-stack": [
+				{
+					"id": "errorStack",
+					"name": "Error Stack"
+				}
+			]
+		},
 		"commands": [
 			{
-				"command": "extension.helloWorld",
-				"title": "Hello World"
+				"command": "errorStack.refreshEntry",
+				"title": "Refresh",
+				"icon": {
+					"light": "resources/light/refresh.svg",
+					"dark": "resources/dark/refresh.svg"
+				}
 			}
-		]
+		],
+		"menus": {
+			"view/title": [
+				{
+					"command": "errorStack.refreshEntry",
+					"when": "view == errorStack",
+					"group": "navigation"
+				}
+			]
+		}
 	},
 	"scripts": {
-		"test": "node ./test/runTest.js"
+		"vscode:prepublish": "npm run compile",
+		"compile": "tsc -p ./",
+		"watch": "tsc -watch -p ./",
+		"pretest": "npm run compile",
+		"test": "node ./out/test/runTest.js"
 	},
 	"devDependencies": {
+		"@types/ftp": "^0.3.31",
 		"@types/glob": "^7.1.1",
+		"@types/mkdirp": "^0.5.2",
 		"@types/mocha": "^5.2.7",
 		"@types/node": "^12.11.7",
+		"@types/rimraf": "^2.0.2",
 		"@types/vscode": "^1.39.0",
-		"eslint": "^6.6.0",
 		"glob": "^7.1.5",
 		"mocha": "^6.2.2",
+		"tslint": "^5.20.0",
 		"typescript": "^3.6.4",
-		"vscode-test": "^1.2.2"
+		"vscode-test": "^1.2.2",
+		"vscode": "^1.1.36"
+	},
+	"dependencies": {
+		"error-position": "^1.0.5",
+		"ftp": "^0.3.10",
+		"jsonc-parser": "^0.4.2",
+		"mkdirp": "^0.5.1",
+		"rimraf": "^2.6.2"
 	}
 }
